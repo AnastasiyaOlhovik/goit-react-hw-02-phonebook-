@@ -1,23 +1,24 @@
+
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import css from './Filter.module.css';
 
-class Filter extends Component {
-    setFilterValue = event => {
-        let value = event.currentTarget.value.toUpperCase();
-        this.props.setFilterToState(value);
-    };
 
-    render() {
-        return (
-            <div>
-                <h4>Find contacts by name</h4>
-                <input onChange={this.setFilterValue}></input>
-            </div>
-        );
-    }
-}
+const Filter = ({ filter }) => {
+    return (
+        <>
+            <p className={css.title}>Find contacts by name</p>
+            <input
+                className={css.input}
+                type="text"
+                name="filter"
+                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                onChange={filter}
+            />
+        </>
+    );
+};
 
-Filter.propTypes = {
-    setFilterToState: PropTypes.func.isRequired,
+Filter.prototype = {
+    filter: PropTypes.func.isRequired,
 };
 export default Filter;

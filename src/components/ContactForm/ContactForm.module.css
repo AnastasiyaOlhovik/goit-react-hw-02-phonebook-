@@ -1,26 +1,35 @@
-label {
-    display: flex;
-    flex-direction: column;
-    max-width: 200px;
-}
-
-button {
-    margin: 5px 10px;
-    background-color: #29167eab;
-    color: white;
-    border-radius: 7px;
-    border-color: #29167eab;
-}
-
-button:hover {
-    background-color: white;
-    color: #29167eab;
-    border-color: #29167eab;
-}
-
-.contactform {
+.container {
+    padding: 10px;
     width: 300px;
-    padding: 20px;
+    border: 1px solid;
+}
+
+.title {
+    padding: 0;
+    margin: 0;
+    margin-top: 15px;
+    
+}
+
+.input {
+    margin-bottom: 20px;
+    width: 395px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.btnSubmit {
     display: block;
-    border: 1px solid #477405;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.75);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 250ms linear;
+    width: 100px;
+    height: 25px;
+}
+
+.btnSubmit:hover,
+.btnSubmit:focus {
+    background-color: #b5ddf2;
 }

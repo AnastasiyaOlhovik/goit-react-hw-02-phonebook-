@@ -1,8 +1,5 @@
-import style from './ContactForm.module.css';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-
+import css from './ContactForm.module.css';
 
 
 class ContactForm extends Component {
@@ -10,70 +7,49 @@ class ContactForm extends Component {
         name: '',
         number: '',
     };
-    handleChange = event => {
-        /*     console.log(event.currentTarget);
-        console.log(event.currentTarget.name);
-        console.log(event.currentTarget.value); */
-        const { name, value } = event.currentTarget;
-        this.setState({ [name]: value });
-        //this.setState({ [event.currentTarget.name]: event.currentTarget.value });
-    };
-    /*   inputNameEvent = event => {
-      this.setState({ curName: event.currentTarget.value });
-    };
-    inputTelEvent = event => {
-      this.setState({ curTel: event.currentTarget.value });
-    }; */
 
-    handleSubmit = event => {
-        event.preventDefault();
-        let contactForAdd = { name: this.state.name, number: this.state.number };
-        //console.log(this.state);
-        this.props.onSubmitData(contactForAdd);
-
-        this.reset();
+    formChange = e => {
+        this.setState({ [e.currentTarget.name]: e.currentTarget.value });
     };
 
-    reset = () => {
-        this.setState({ name: '', number: '' });
+    formSubmit = e => {
+        e.preventDefault();
+        this.props.addContacts(this.state);
+        e.currentTarget.reset();
     };
+
     render() {
         return (
-            <div className={style.contactform}>
-                <form type="submit" onSubmit={this.handleSubmit}>
-                    <label>
-                        Name
-                        <input
-                            type="text"
-                            name="name"
-                            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-                            required
-                            onChange={this.handleChange}
-                            value={this.state.name}
-                        />
-                    </label>
-                    <label>
-                        Number
-                        <input
-                            type="tel"
-                            name="number"
-                            pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
-                            title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
-                            required
-                            onChange={this.handleChange}
-                            value={this.state.number}
-                        />
-                    </label>
-
-                    <button type="submit">Add contact</button>
+            <div >
+                <form onSubmit={this.formSubmit}>
+                    <p className={css.title}>Name</p>
+                    <input
+                        className={css.input}
+                        placeholder="Jacob Mercer"
+                        type="text"
+                        name="name"
+                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                        required
+                        onChange={this.formChange}
+                    />
+                    <p className={css.title}>Number</p>
+                    <input
+                        className={css.input}
+                        placeholder="257-42-21"
+                        type="tel"
+                        name="number"
+                        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                        required
+                        onChange={this.formChange}
+                    />
+                    <button type="submit" className={css.btnSubmit}>
+                        Add contact
+                    </button>
                 </form>
             </div>
         );
     }
 }
-
-ContactForm.propTypes = {
-    onSubmitData: PropTypes.func.isRequired,
-};
 export default ContactForm;
